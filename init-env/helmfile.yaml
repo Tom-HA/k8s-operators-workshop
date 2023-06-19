@@ -1,0 +1,14 @@
+repositories:
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
+
+releases:
+  - name: argo-cd
+    namespace: argocd
+    chart: argo/argo-cd
+    version: 5.36.2
+    values:
+    - values/argo-cd/values.yaml
+
+helmDefaults:
+  kubeContext: default # change this to your local K8s cluster's context

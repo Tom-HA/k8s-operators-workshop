@@ -3,3 +3,4 @@ postgres:
   user: "postgres"
   password: "postgres"
   default_database: "postgres"
+  uri_args: "sslmode=disable"

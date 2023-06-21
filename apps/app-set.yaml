@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: guestbook
+  name: app-set
   namespace: argocd
 spec:
   generators:
@@ -11,24 +11,27 @@ spec:
       files:
       - path: "apps/**/app-config.yaml"
   template:
-    project: default
-  sources:
-    - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
-      targetRevision: init-setup
-      ref: deployRepo
-    - repoURL: {{repoURL}}
-      targetRevision: {{targetRevision}}
-      chart: '{{chart}}'
-      helm:
-        valueFiles:
-          - $deployRepo/apps/{{path.basename}}/values.yaml
-  destination:
-    name: https://kubernetes.default.svc
-    namespace: {{namespace}}
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-      allowEmpty: false
-    syncOptions:
-    - CreateNamespace=true
+    metadata:
+      name: '{{chart}}'
+    spec:
+      project: default
+      sources:
+        - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
+          targetRevision: init-setup
+          ref: deployRepo
+        - repoURL: '{{repoURL}}'
+          targetRevision: '{{targetRevision}}'
+          chart: '{{chart}}'
+          helm:
+            valueFiles:
+              - $deployRepo/apps/{{path.basename}}/values.yaml
+      destination:
+        name: in-cluster
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+        - CreateNamespace=true

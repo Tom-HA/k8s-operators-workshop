@@ -1,0 +1,4 @@
+global:
+  postgresql:
+    auth:
+      postgresPassword: postgres # the password for user 'postgres', don't do it in production ;) 

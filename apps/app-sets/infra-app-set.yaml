@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: app-set
+  name: infra-app-set
   namespace: argocd
 spec:
   generators:
@@ -9,7 +9,7 @@ spec:
       repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git
       revision: init-setup
       files:
-      - path: "apps/**/app-config.yaml"
+      - path: "apps/infra/**/app-config.yaml"
   template:
     metadata:
       name: '{{chart}}'

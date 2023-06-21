@@ -8,6 +8,14 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/argoproj/argocd-example-apps.git
+    repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git
     targetRevision: init-setup
-    path: apps/app-sets/infra-app-set.yaml
+    path: apps/app-sets
+  destination:
+    name: in-cluster
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false

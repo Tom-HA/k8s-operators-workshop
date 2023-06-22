@@ -24,7 +24,7 @@ spec:
           chart: '{{chart}}'
           helm:
             valueFiles:
-              - $deployRepo/apps/{{path.basename}}/values.yaml
+              - $deployRepo/apps/infra/{{path.basename}}/values.yaml
       destination:
         name: in-cluster
         namespace: '{{namespace}}'

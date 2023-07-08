@@ -4,7 +4,7 @@ In this workshop, you are going to learn and experience with Kubernetes operator
 
 ## Pre-requisites
 
-Before you start the workshop, you'll need to have a Kubernetes cluster available -
+Before you start the workshop, you'll need to have a Kubernetes cluster available.  
 You can run a local cluster using [K3s with K3d](https://k3d.io/v5.4.6/#installation), [Kubernetes with Docker desktop](https://docs.docker.com/desktop/kubernetes/), [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation), or any other method you prefer.
 
 Make sure you have the following installed:
@@ -16,4 +16,4 @@ Make sure you have the following installed:
 
 ## Getting started
 
-To get started, fork this repository, and follow the documentation under the `docs` folder.  
+To get started, fork this repository, and follow the documentation under the [docs](./docs) folder.  

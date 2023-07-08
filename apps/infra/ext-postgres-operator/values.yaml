@@ -1,0 +1,6 @@
+postgres:
+  host: "postgresql.postgres.svc.cluster.local"
+  user: "postgres"
+  password: "postgres"
+  default_database: "postgres"
+  uri_args: "sslmode=disable"

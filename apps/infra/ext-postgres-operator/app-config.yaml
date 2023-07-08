@@ -1,0 +1,5 @@
+repoURL: https://movetokube.github.io/postgres-operator
+targetRevision: 1.2.3
+chart: ext-postgres-operator
+namespace: postgres
+    

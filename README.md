@@ -1,6 +1,6 @@
 # k8s-operators-workshop
 
-In this workshop, you are going to learn and experience with Kubernetes operators, CRDs, CRs, Helm, Helmfile, Argo-CD, and GitOps.  
+In this workshop, you are going to learn and experiment with Kubernetes operators, CRDs, CRs, Helm, Helmfile, Argo-CD, and GitOps.  
 
 ## Pre-requisites
 

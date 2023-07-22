@@ -6,8 +6,8 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git
-      revision: init-setup
+      repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
+      revision: main
       files:
       - path: "apps/infra/**/app-config.yaml"
   template:
@@ -17,7 +17,7 @@ spec:
       project: default
       sources:
         - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
-          targetRevision: init-setup
+          targetRevision: main
           ref: deployRepo
         - repoURL: '{{repoURL}}'
           targetRevision: '{{targetRevision}}'

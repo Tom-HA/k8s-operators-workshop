@@ -12,3 +12,4 @@ releases:
 
 helmDefaults:
   kubeContext: default # change this to your local K8s cluster's context
+  wait: true

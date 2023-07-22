@@ -2,7 +2,7 @@
 
 In this section we are going to apply a Custom Resource of kind _Application_ and learn a bit about a Custom Resource of kind _Application Set_.  
 
-Now that we have Argo CD deployed in our cluster, and we can access its web UI, we need to create an Argo CD application that tells Argo CD to sync manifests and helm charts from our repository.
+Now that we have Argo CD deployed in our cluster, and we can access its web UI, we need to create an Argo CD application that tells Argo CD to sync manifests and helm charts from your repository.
 
 ## Argo CD Application
 
@@ -13,11 +13,11 @@ Since it is the first application that we deploy, and it tells Argo CD to deploy
 
 The [app-sets](../apps/app-sets) directory contains
 Custom Resources of kind _Application Set_.  
-These Custom Resources will tell Argo CD to dynamically create _Applications_ according to the file structure we have in our repository.
+These Custom Resources will tell Argo CD to dynamically create _Applications_ according to the file structure in your repository.
 
 ## Edit Argo CD Root Application
 
-Before we apply the root application manifest, we need to set our repository's URL (assuming you forked the repository, if you didn't, please follow the _Getting started_ [here](../README.md#getting-started)).  
+Before we apply the root application manifest, we need to set your repository's URL (assuming you forked the repository, if you didn't, please follow the _Getting started_ [here](../README.md#getting-started)).  
 Open the [argocd-root-app.yaml](./values/argo-cd/argocd-root-app.yaml) manifest, and there, change the `repoURL` to your repository's URL.  
 
 ## Edit Argo CD Application sets
@@ -31,6 +31,13 @@ Now, after we've updated our manifests, we can apply our root application by exe
 ```sh
 kubectl apply -f ./values/argo-cd/argocd-root-app.yaml
 ```
+
+## Review The New Resources
+
+Now we can go to the Argo CD UI and see the new applications being provisioned in the cluster!  
+
+From now on, we can go full GitOps!  
+This means, no more manual `kubectl` commands, and every change to the manifests will be made by pushing the changes to your repository.
 
 ## Learn more
 

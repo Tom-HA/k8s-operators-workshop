@@ -37,8 +37,9 @@ kubectl apply -f ./values/argo-cd/argocd-root-app.yaml
 Now we can go to the Argo CD UI and see the new applications being provisioned in the cluster!  
 
 From now on, we can go full GitOps!  
-This means, no more manual `kubectl` commands, and every change to the manifests will be made by pushing the changes to your repository.
+This means, no more manual `kubectl` commands, and every change to the manifests can be made by updating your repository.  
+You can go back to the [docs](../docs) folder and continue with the workshop by moving to the [next section](../docs/02_create_postgres_database).
 
 ## Learn more
 
-Congratulations! You've just implemented the _App of Apps_ pattern in Argo CD, you can read more about this pattern in [Argo CD's documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#app-of-apps).
+Congratulations! You've just deployed Argo CD and implemented the _App of Apps_ pattern, you can read more about this pattern in [Argo CD's documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#app-of-apps).

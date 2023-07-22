@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git
-    targetRevision: init-setup
+    targetRevision: main
     path: apps/app-sets
   destination:
     name: in-cluster

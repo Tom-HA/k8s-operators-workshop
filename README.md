@@ -16,4 +16,4 @@ Make sure you have the following utilities installed:
 
 ## Getting started
 
-To get started, fork this repository, and follow the documentation under the [docs](./docs) folder.  
+To get started, __fork this repository__, and follow the documentation under the [docs](./docs) folder.  

@@ -2,8 +2,8 @@
 
 ## GitOps
 
-GitOps is a deployment methodology, where you declare the desired state of your deployment with a Git repository which acts as the source of truth.  
-For example, if the desired state of you deployment consists of a deployment and service manifests, once you've pushed the manifests into a Git repository, you can be sure they will be present in the Kubernetes cluster.  
+GitOps is a deployment methodology, where we declare the desired state of our deployment with a Git repository which acts as the source of truth.  
+For example, if the desired state of our deployment consists of a deployment and service manifests, once we've pushed the manifests into a Git repository, we can be sure they will be present in the Kubernetes cluster.  
 
 ## Argo CD
 

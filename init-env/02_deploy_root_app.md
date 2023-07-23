@@ -13,7 +13,9 @@ Since it is the first application that we deploy, and it tells Argo CD to deploy
 
 The [app-sets](../apps/app-sets) directory contains
 Custom Resources of kind _Application Set_.  
-These Custom Resources will tell Argo CD to dynamically create _Applications_ according to the file structure in your repository.
+These Custom Resources will tell Argo CD to dynamically create _Applications_ according to the file structure in your repository.  
+In our case, for each folder in the [infra folder](../apps/infra), create an _Application_ with the configuration in the .yaml files.  
+For example, see the .yaml files in the [postgres folder](../apps/infra/postgres). 
 
 ## Edit Argo CD Root Application
 
@@ -38,7 +40,7 @@ Now we can go to the Argo CD UI and see the new applications being provisioned i
 
 From now on, we can go full GitOps!  
 This means, no more manual `kubectl` commands, and every change to the manifests can be made by updating your repository.  
-You can go back to the [docs](../docs) folder and continue with the workshop by moving to the [next section](../docs/02_create_postgres_database).
+You can go back to the [docs](../docs) folder and continue with the workshop by moving to the [next section](../docs/02_create_postgres_database.md).
 
 ## Learn more
 

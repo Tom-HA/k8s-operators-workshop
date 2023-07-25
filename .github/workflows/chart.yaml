@@ -75,10 +75,10 @@ jobs:
           helm registry login ghcr.io -u "${{ github.actor }}" -p "${{secrets.GITHUB_TOKEN}}"
       - name: update chart version
         run: |
-          sed -i -e "s/version:.*/version: \"${{ env.VERSION }}\"/" -e "s/appVersion:.*/appVersion: \"${{ env.VERSION }}\"/" charts/${PROJ_NAME}/Chart.yaml
+          sed -i -e "s/version:.*/version: \"${{ env.VERSION }}\"/" -e "s/appVersion:.*/appVersion: \"${{ env.VERSION }}\"/" sample-pg-app/charts/${PROJ_NAME}/Chart.yaml
       - name: package chart
         run: | 
-          helm package charts/${PROJ_NAME}
+          helm package sample-pg-app/charts/${PROJ_NAME}
       - name: publish chart
         run: | 
           helm push "${PROJ_NAME}-${{ env.VERSION }}.tgz"  oci://${{ env.REPO_SLUG }}/${{ env.HEAD_REF }}/chart

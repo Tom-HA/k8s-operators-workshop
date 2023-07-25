@@ -67,7 +67,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: sample-pg-app
           push: true
           tags: |
             ${{ env.REPO_SLUG }}/${{ env.HEAD_REF }}/${{ env.PROJ_NAME }}:latest

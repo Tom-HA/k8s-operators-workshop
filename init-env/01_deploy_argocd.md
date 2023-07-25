@@ -1,9 +1,9 @@
-# Deploy Argo CD
+# Initial Provisioning Overview
 
 In this section, we'll use _Helmfile_ to install Argo CD, this enables us to complete this workshop by following the GitOps methodology.  
 Using Argo CD, we'll provision a PostgreSQL database and a PostgreSQL operator.  
 
-## Initial provisioning
+## Deploy Argo CD
 
 Open the `helmfile.yaml` file, there, make sure the `kubeContext` is configured with the Kubernetes cluster you want to work with.  
 Next, install Argo-CD by executing:
@@ -18,18 +18,19 @@ This will install the Argo-CD's Helm chart with the values under:
 ./init-env/values/argo-cd/values.yaml
 ```
 
-## Access Argo CD UI
+## Forward traffic to Argo CD
 
-Now that Argo CD is installed, we can access its UI.  
-To do that, we'll use port forwarding to access the Kubernetes service of Argo CD's UI.  
+Now that Argo CD is installed, we'll need to forward traffic to the Argo CD service, so we could access its web UI.  
+To do that, we'll use kubectl port-forward to forward traffic from localhost to the Argo CD (Kubernetes) service.  
 The following command will forward traffic from _localhost_ at port 8080 to the _argocd-server_ service at port 80:
 
 ```sh
 kubectl -n argocd port-forward service/argo-cd-argocd-server 8080:80 &
 ```
 
-
 ## Log in to Argo CD UI
+
+In your browser, go to [localhost:8080](http://localhost:8080).  
 
 The default admin user name is `admin`.  
 The password is stored in a Kubernetes secret which is generated during the initial deployment and it's base64 encoded.  

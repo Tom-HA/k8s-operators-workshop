@@ -15,7 +15,18 @@ The [app-sets](../apps/app-sets) directory contains
 Custom Resources of kind _Application Set_.  
 These Custom Resources will tell Argo CD to dynamically create _Applications_ according to the file structure in your repository.  
 In our case, for each folder in the [infra folder](../apps/infra), create an _Application_ with the configuration in the .yaml files.  
-For example, see the .yaml files in the [postgres folder](../apps/infra/postgres). 
+For example, see the .yaml files in the [postgres folder](../apps/infra/postgres).  
+
+### Flow
+
+```mermaid
+  graph TD;
+      rootApp[Deploy ./init-env/values/argo-cd/argocd-root-app.yaml Application]--reconcile app-sets directory manifests-->infraAppSet[Deploy ./apps/app-sets/infra-app-set.yaml ApplicationSet]
+      
+      infraAppSet--reconcile ext-postgres-operator application-->extPostgresOperator[deploy ext-postgres-operator chart]
+      
+      infraAppSet--reconcile postgresql application-->postgres[Deploy postgres chart]
+```
 
 ## Edit Argo CD Root Application
 

@@ -21,11 +21,11 @@ For example, see the .yaml files in the [postgres folder](../apps/infra/postgres
 
 ```mermaid
   graph TD;
-      rootApp[Deploy ./init-env/values/argo-cd/argocd-root-app.yaml Application]--reconcile app-sets directory manifests-->infraAppSet[Deploy ./apps/app-sets/infra-app-set.yaml ApplicationSet]
+      rootApp[Deploy Argo CD root Application]-->infraAppSet[Deploy Argo CD ApplicationSet]
       
-      infraAppSet--reconcile ext-postgres-operator application-->extPostgresOperator[deploy ext-postgres-operator chart]
+      infraAppSet-->extPostgresOperator[Deploy ext-postgres-operator chart]
       
-      infraAppSet--reconcile postgresql application-->postgres[Deploy postgres chart]
+      infraAppSet-->postgres[Deploy postgres chart]
 ```
 
 ## Edit Argo CD Root Application

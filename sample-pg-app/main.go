@@ -49,11 +49,17 @@ func init() {
 		user:     user,
 		password: password,
 		dbName:   dbName,
-		sslMode:  "false",
+		sslMode:  "disable",
 	}
+	fmt.Println("Connecting to database...")
 
 	var err error
-	DBConn, err := getDBConnection(pgConnection)
+	DBConn, err = getDBConnection(pgConnection)
+	if err != nil {
+		panic(err)
+	}
+
+	err = pingDatabase(DBConn)
 	if err != nil {
 		panic(err)
 	}
@@ -65,6 +71,7 @@ func init() {
 }
 
 func main() {
+	defer DBConn.Close()
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -80,7 +87,7 @@ func main() {
 		return addData(c, DBConn)
 	})
 
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(":5001"))
 
 }
 
@@ -93,12 +100,7 @@ func getDBConnection(connectionInfo PostgresConnection) (dbConnection *sql.DB, e
 	if err != nil {
 		return nil, err
 	}
-	defer db.Close()
 
-	err = pingDatabase(db)
-	if err != nil {
-		return nil, err
-	}
 	return db, nil
 }
 
@@ -135,11 +137,19 @@ func addData(c echo.Context, dbConnection *sql.DB) error {
 		return err
 	}
 
+	if data.Data == "" {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Data cannot be empty"})
+	}
+
 	query := `
-	insert into "%s"("%s") values('') 
+	insert into "%s"("%s") values($1) 
 	`
-	insertDataQuery := fmt.Sprintf(query, TableName, ColumnName, data.Data)
-	_, err = dbConnection.Exec(insertDataQuery)
+	insertDataQuery := fmt.Sprintf(query, TableName, ColumnName)
+	_, err = dbConnection.Exec(insertDataQuery, data.Data)
+
+	if err != nil {
+		return err
+	}
 
 	return c.JSON(http.StatusCreated, data)
 }

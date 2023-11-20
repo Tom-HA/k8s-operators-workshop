@@ -1,0 +1,85 @@
+---
+name: Update Helm Chart
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches: [main]
+    paths:
+      - 'charts/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'charts/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  SEM_VER: "0.1.0"
+  PROJ_NAME: pyxor
+
+jobs:  
+  Lint_Chart:
+    name: Test Helm Chart
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: azure/setup-helm@v3
+        with:
+          version: v3.9.0
+      - name: lint chart
+        run: | 
+          helm lint charts/${PROJ_NAME}
+
+  Update-Chart:
+    name: Update Helm Chart
+    needs: [Lint_Chart]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set variables
+        id: vars
+        shell: bash
+        run: |
+          if [[ ${{ github.event_name }} == 'pull_request' ]]; then
+            export commit_sha=${{ github.event.pull_request.head.sha }}
+          else
+            export commit_sha=${{ github.sha }}
+          fi
+          export version=$(echo ${SEM_VER}-${commit_sha:0:7})
+
+          if [[ -z "${{ github.head_ref }}" ]]; then
+            export "head_ref=main"
+          else
+            export "head_ref=${{ github.head_ref }}"
+          fi
+
+          export repo_slug=$(echo ${GITHUB_REPOSITORY,,})
+
+          echo "VERSION=${version}" >> $GITHUB_ENV
+          echo "HEAD_REF=${head_ref}" >> $GITHUB_ENV
+          echo "REPO_SLUG=ghcr.io/${repo_slug}" >> $GITHUB_ENV
+
+      - uses: azure/setup-helm@v3
+        with:
+          version: v3.9.0
+        id: install
+      - name: login to ghcr
+        run: |
+          helm registry login ghcr.io -u "${{ github.actor }}" -p "${{secrets.GITHUB_TOKEN}}"
+      - name: update chart version
+        run: |
+          sed -i -e "s/version:.*/version: \"${{ env.VERSION }}\"/" -e "s/appVersion:.*/appVersion: \"${{ env.VERSION }}\"/" sample-pg-app/charts/${PROJ_NAME}/Chart.yaml
+      - name: package chart
+        run: | 
+          helm package sample-pg-app/charts/${PROJ_NAME}
+      - name: publish chart
+        run: | 
+          helm push "${PROJ_NAME}-${{ env.VERSION }}.tgz"  oci://${{ env.REPO_SLUG }}/${{ env.HEAD_REF }}/chart
+  

@@ -21,7 +21,7 @@ spec:
           ref: deployRepo
         - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
           targetRevision: sample-application
-          path: "apps/services/**/hooks/*.yaml"
+          path: "apps/services/{{path.basename}}/hooks/*.yaml"
         - repoURL: '{{repoURL}}'
           targetRevision: '{{targetRevision}}'
           path: '{{chartPath}}'

@@ -1,5 +1,5 @@
 repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git
 targetRevision: sample-application
-path: ./sample-pg-app/chart/sample-pg-app
+chartPath: ./sample-pg-app/chart/sample-pg-app
 namespace: services
     

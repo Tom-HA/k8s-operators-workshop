@@ -17,7 +17,7 @@ spec:
       project: default
       sources:
         - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
-          targetrevision: sample-application
+          targetRevision: sample-application
           ref: deployRepo
         - repoURL: '{{repoURL}}'
           targetRevision: '{{targetRevision}}'

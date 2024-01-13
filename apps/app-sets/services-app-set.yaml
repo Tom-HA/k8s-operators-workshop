@@ -22,7 +22,7 @@ spec:
           ref: deployRepo
         - repoURL: '{{repoURL}}'
           targetRevision: '{{targetRevision}}'
-          chart: '{{chart}}'
+          path: '{{path}}'
           helm:
             valueFiles:
               - $deployRepo/apps/services/{{path.basename}}/values.yaml

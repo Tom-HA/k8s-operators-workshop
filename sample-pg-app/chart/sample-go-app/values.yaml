@@ -28,6 +28,12 @@ podAnnotations: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
+podEnvVars:
+  POSTGRES_HOST: postgresql
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres # in a production environment you want to implement a solution like `https://github.com/external-secrets/external-secrets` or `https://github.com/bitnami-labs/sealed-secrets` 
+  POSTGRES_DB: postgres
+
 securityContext: {}
   # capabilities:
   #   drop:

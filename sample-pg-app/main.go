@@ -19,11 +19,12 @@ const (
 )
 
 var (
-	host     = os.Getenv("POSTGRES_HOST")
-	port     = os.Getenv("POSTGRES_PORT")
-	user     = os.Getenv("POSTGRES_USER")
-	password = os.Getenv("POSTGRES_PASSWORD")
-	dbName   = os.Getenv("POSTGRES_DB")
+	pgHost      = os.Getenv("POSTGRES_HOST")
+	pgPort      = os.Getenv("POSTGRES_PORT")
+	pgUser      = os.Getenv("POSTGRES_USER")
+	pgPassword  = os.Getenv("POSTGRES_PASSWORD")
+	dbName      = os.Getenv("POSTGRES_DB")
+	servicePort = os.Getenv("SERVICE_PORT")
 
 	DBConn *sql.DB
 	lock   = sync.Mutex{}
@@ -44,10 +45,10 @@ type TableData struct {
 
 func init() {
 	pgConnection := PostgresConnection{
-		host:     host,
-		port:     port,
-		user:     user,
-		password: password,
+		host:     pgHost,
+		port:     pgPort,
+		user:     pgUser,
+		password: pgPassword,
 		dbName:   dbName,
 		sslMode:  "disable",
 	}
@@ -87,7 +88,11 @@ func main() {
 		return addData(c, DBConn)
 	})
 
-	e.Logger.Fatal(e.Start(":5001"))
+	if servicePort == "" {
+		servicePort = "5001"
+	}
+
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", servicePort)))
 
 }
 

@@ -10,7 +10,6 @@ spec:
       revision: sample-application
       files:
       - path: "apps/services/**/app-config.yaml"
-      - path: "apps/services/**/hooks/*.yaml"
   template:
     metadata:
       name: '{{path.basename}}'
@@ -20,6 +19,9 @@ spec:
         - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
           targetRevision: sample-application
           ref: deployRepo
+        - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
+          targetRevision: sample-application
+          path: "apps/services/**/hooks/*.yaml"
         - repoURL: '{{repoURL}}'
           targetRevision: '{{targetRevision}}'
           path: '{{chartPath}}'

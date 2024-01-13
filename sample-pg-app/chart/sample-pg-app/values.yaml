@@ -1,4 +1,4 @@
-# Default values for sample-go-app.
+# Default values for sample-pg-app.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -28,11 +28,7 @@ podAnnotations: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
-podEnvVars:
-  POSTGRES_HOST: postgresql
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres # in a production environment you want to implement a solution like `https://github.com/external-secrets/external-secrets` or `https://github.com/bitnami-labs/sealed-secrets` 
-  POSTGRES_DB: postgres
+podEnvVars: {}
 
 securityContext: {}
   # capabilities:

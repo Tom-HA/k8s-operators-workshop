@@ -102,6 +102,7 @@ func getDBConnection(connectionInfo PostgresConnection) (dbConnection *sql.DB, e
 		"password=%s dbname=%s sslmode=%s",
 		connectionInfo.host, connectionInfo.port, connectionInfo.user,
 		connectionInfo.password, connectionInfo.dbName, connectionInfo.sslMode)
+	fmt.Println(pgConnectionInfo)
 	db, err := sql.Open("postgres", pgConnectionInfo)
 	if err != nil {
 		return nil, err

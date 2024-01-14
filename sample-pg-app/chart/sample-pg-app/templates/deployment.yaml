@@ -48,6 +48,8 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+            - name: SERVICE_PORT
+              value: {{ .Values.service.port }}
           {{- range $key, $value := .Values.podEnvVars }}
             - name: {{ $key }}
               value: {{ $value | quote }}

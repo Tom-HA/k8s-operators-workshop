@@ -1,5 +1,6 @@
 podEnvVars:
   POSTGRES_HOST: postgresql.postgres.svc.cluster.local
   POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres # in a production environment you want to implement a solution like `https://github.com/external-secrets/external-secrets` or `https://github.com/bitnami-labs/sealed-secrets` 
+  # in a production environment you want to implement a solution like `https://github.com/external-secrets/external-secrets` or `https://github.com/bitnami-labs/sealed-secrets` 
+  POSTGRES_PASSWORD: postgres
   POSTGRES_DB: postgres

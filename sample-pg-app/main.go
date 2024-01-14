@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"sync"
+	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -112,9 +113,15 @@ func getDBConnection(connectionInfo PostgresConnection) (dbConnection *sql.DB, e
 }
 
 func pingDatabase(dbConnection *sql.DB) error {
-	err := dbConnection.Ping()
-	if err != nil {
-		return fmt.Errorf("could not connect to the database: %w", err)
+	waitSeconds := 5
+	for counter := 0; counter < 7; counter++ {
+		err := dbConnection.Ping()
+		if counter == 6 {
+			return fmt.Errorf("exceeded max timeout %d, could not connect to the database: %w", waitSeconds*6, err)
+		}
+		if err != nil {
+			time.Sleep(time.Duration(waitSeconds) * time.Second)
+		}
 	}
 
 	fmt.Println("Successfully connected to the database!")

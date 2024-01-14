@@ -44,6 +44,7 @@ type TableData struct {
 }
 
 func init() {
+	fmt.Println(os.Environ())
 	pgConnection := PostgresConnection{
 		host:     pgHost,
 		port:     pgPort,

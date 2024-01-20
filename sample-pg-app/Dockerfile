@@ -5,7 +5,7 @@ WORKDIR /build
 COPY go.mod go.sum /build/
 RUN go mod download
 
-COPY main.go /build
+COPY *.go /build
 
 RUN CGO_ENABLED=0 go build -o /build/sample-pg-app
 RUN chmod 755 /build/sample-pg-app

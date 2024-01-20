@@ -18,6 +18,7 @@ concurrency:
 
 env:
   REGISTRY: ghcr.io
+  PROJ_NAME: sample-pg-app
 
 jobs:
   build-and-publish:
@@ -57,7 +58,7 @@ jobs:
           DOCKER_METADATA_PR_HEAD_SHA: true
         with:
           images: |
-            ${{ env.REGISTRY }}/${{ env.REPO_SLUG }}
+            ${{ env.REGISTRY }}/${{ env.REPO_SLUG }}/${{ env.PROJ_NAME }}
           tags: |
             type=raw,value=${{ env.SOURCE_REF_NAME }}-{{sha}}
             type=semver,pattern={{version}}
@@ -71,5 +72,5 @@ jobs:
           file: sample-pg-app/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_SLUG }}:build-cache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_SLUG }}:build-cache,mode=max
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_SLUG }}/${{ env.PROJ_NAME }}:build-cache
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_SLUG }}/${{ env.PROJ_NAME }}:build-cache,mode=max

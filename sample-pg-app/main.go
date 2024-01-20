@@ -26,12 +26,9 @@ var (
 	pgPassword  = os.Getenv("POSTGRES_PASSWORD")
 	dbName      = os.Getenv("POSTGRES_DB")
 	servicePort = os.Getenv("SERVICE_PORT")
-
-	DBConn *sql.DB
-	lock   = sync.Mutex{}
 )
 
-type PostgresConnection struct {
+type PostgresConConfig struct {
 	host     string
 	port     string
 	user     string
@@ -40,13 +37,19 @@ type PostgresConnection struct {
 	sslMode  string
 }
 
+type DatabaseConnection struct {
+	dbConnection *sql.DB
+}
+
 type TableData struct {
 	Data string `json:"data"`
 }
 
-func init() {
-	fmt.Println(os.Environ())
-	pgConnection := PostgresConnection{
+func main() {
+	defer dbConn.Close()
+	e := echo.New()
+
+	pgConnection := PostgresConConfig{
 		host:     pgHost,
 		port:     pgPort,
 		user:     pgUser,
@@ -55,26 +58,21 @@ func init() {
 		sslMode:  "disable",
 	}
 
-	var err error
-	DBConn, err = getDBConnection(pgConnection)
+	dbConn, err := getDBConnection(pgConnection)
 	if err != nil {
-		panic(err)
+		e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", err)))
 	}
 
-	err = pingDatabase(DBConn)
+	err = pingDatabase(dbConn)
 	if err != nil {
-		panic(err)
+		e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", err)))
 	}
 
-	err = initDatabase(DBConn)
+	err = initDatabase(dbConn)
 	if err != nil {
-		panic(err)
+		e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", err)))
 	}
-}
-
-func main() {
-	defer DBConn.Close()
-	e := echo.New()
+	
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
@@ -83,21 +81,21 @@ func main() {
 		return c.NoContent(http.StatusOK)
 	})
 	e.GET("/data", func(c echo.Context) error {
-		return getData(c, DBConn)
+		return getData(c, dbConn)
 	})
 	e.POST("/data", func(c echo.Context) error {
-		return addData(c, DBConn)
+		return addData(c, dbConn)
 	})
 
 	if servicePort == "" {
 		servicePort = "5001"
 	}
 
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", servicePort)))
+	
 
 }
 
-func getDBConnection(connectionInfo PostgresConnection) (dbConnection *sql.DB, err error) {
+func getDBConnection(connectionInfo PostgresConConfig) (dbConnection *sql.DB, err error) {
 	pgConnectionInfo := fmt.Sprintf("host=%s port=%s user=%s "+
 		"password=%s dbname=%s sslmode=%s",
 		connectionInfo.host, connectionInfo.port, connectionInfo.user,
@@ -110,19 +108,18 @@ func getDBConnection(connectionInfo PostgresConnection) (dbConnection *sql.DB, e
 	return db, nil
 }
 
-func pingDatabase(dbConnection *sql.DB) error {
+func pingDatabase(ctx echo.Context,  *sql.DB) error {
 	waitSeconds := 5
 	for counter := 0; counter < 7; counter++ {
 		err := dbConnection.Ping()
 		if counter == 6 {
-			return fmt.Errorf("exceeded max timeout %d, could not connect to the database: %w", waitSeconds*6, err)
+			return fmt.Errorf("could not connect to the database: %w", err)
 		}
 		if err != nil {
 			time.Sleep(time.Duration(waitSeconds) * time.Second)
 		}
 	}
 
-	fmt.Println("Successfully connected to the database!")
 	return nil
 }
 

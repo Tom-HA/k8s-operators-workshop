@@ -7,7 +7,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
-      revision: sample-application
+      revision: main
       files:
       - path: "apps/services/**/app-config.yaml"
   template:
@@ -17,10 +17,10 @@ spec:
       project: default
       sources:
         - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
-          targetRevision: sample-application
+          targetRevision: main
           ref: deployRepo
         - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
-          targetRevision: sample-application
+          targetRevision: main
           path: "apps/services/{{path.basename}}/hooks"
         - repoURL: '{{repoURL}}'
           targetRevision: '{{targetRevision}}'

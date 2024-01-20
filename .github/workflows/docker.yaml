@@ -1,76 +1,76 @@
----
 name: Build Container Image
 
 on:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - '*'
   workflow_dispatch:
 
-  push:
-    branches: [main]
   pull_request:
-    branches: [main]
+    branches: 
+      - 'main'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 env:
-  SEM_VER: "0.1.0"
+  REGISTRY: ghcr.io
   PROJ_NAME: sample-pg-app
 
 jobs:
-  Package-Container:
-    name: Build a Docker/OCI image
+  build-and-publish:
     runs-on: ubuntu-latest
+    name: Container Build and Publish
     permissions:
       contents: read
       packages: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        
-      - name: Set variables
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      - 
+        name: Set variables
         id: vars
         shell: bash
         run: |
-          if [[ ${{ github.event_name }} == 'pull_request' ]]; then
-            export commit_sha=${{ github.event.pull_request.head.sha }}
-          else
-            export commit_sha=${{ github.sha }}
-          fi
-          export version=$(echo ${SEM_VER}-${commit_sha:0:7})
-
-          if [[ -z "${{ github.head_ref }}" ]]; then
-            export "head_ref=main"
-          else
-            export "head_ref=${{ github.head_ref }}"
-          fi
-
           export repo_slug=$(echo ${GITHUB_REPOSITORY,,})
+          echo "REPO_SLUG=${repo_slug}" >> $GITHUB_ENV
+          echo "SOURCE_REF_NAME=${{ github.head_ref || github.ref_name }}" >> $GITHUB_ENV
 
-          echo "VERSION=${version}" >> $GITHUB_ENV
-          echo "HEAD_REF=${head_ref}" >> $GITHUB_ENV
-          echo "REPO_SLUG=ghcr.io/${repo_slug}" >> $GITHUB_ENV
-      
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to Container registry
+        uses: docker/login-action@v3
         with:
-          registry: ghcr.io
+          registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Build and push
-        uses: docker/build-push-action@v3
+      -
+        name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        env:
+          DOCKER_METADATA_PR_HEAD_SHA: true
         with:
-          context: sample-pg-app
-          push: true
+          images: |
+            ${{ env.REGISTRY }}/${{ env.REPO_SLUG }}/${{ env.PROJ_NAME }}
           tags: |
-            ${{ env.REPO_SLUG }}/${{ env.HEAD_REF }}/${{ env.PROJ_NAME }}:latest
-            ${{ env.REPO_SLUG }}/${{ env.HEAD_REF }}/${{ env.PROJ_NAME }}:${{ env.VERSION }}
-          cache-from: type=registry,ref=${{ env.REPO_SLUG }}/${{ env.HEAD_REF }}/${{ env.PROJ_NAME }}:cache
-          cache-to: type=registry,ref=${{ env.REPO_SLUG }}/${{ env.HEAD_REF }}/${{ env.PROJ_NAME }}:cache,mode=max
+            type=raw,value=${{ env.SOURCE_REF_NAME }}-{{sha}}
+            type=semver,pattern={{version}}
+            type=raw,value=latest,enable={{is_default_branch}}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          context: sample-pg-app
+          file: sample-pg-app/Dockerfile
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_SLUG }}/${{ env.PROJ_NAME }}:build-cache
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_SLUG }}/${{ env.PROJ_NAME }}:build-cache,mode=max

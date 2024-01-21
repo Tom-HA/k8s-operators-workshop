@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git
-    targetRevision: main
+    targetRevision: refactor-doc-and-pg-auth
     path: apps/app-sets
   destination:
     name: in-cluster

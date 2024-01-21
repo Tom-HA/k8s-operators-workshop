@@ -1,10 +1,10 @@
 apiVersion: db.movetokube.com/v1alpha1
 kind: Postgres
 metadata:
-  name: my-db
+  name: sample-pg-app-db
   namespace: services
   annotations:
     argocd.argoproj.io/hook: PreSync # Executes prior to the application of the manifests.
 spec:
-  database: test-db # Name of database created in PostgreSQL
+  database: sample-db # Name of database created in PostgreSQL
   dropOnDelete: false # Set to true if you want the operator to drop the database and role when this CR is deleted (optional)

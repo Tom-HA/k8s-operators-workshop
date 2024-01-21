@@ -1,6 +1,6 @@
 # Deploy Argo CD Root Application
 
-In this section we are going to apply a Custom Resource of kind _Application_ and learn a bit about a Custom Resource of kind _Application Set_.  
+In this section we are going to apply a Custom Resource of kind _Application_ and learn about a Custom Resource of kind _Application Set_.  
 
 Now that we have Argo CD deployed in our cluster, and we can access its web UI, we need to create an Argo CD application that tells Argo CD to sync manifests and helm charts from your repository.
 
@@ -21,11 +21,14 @@ For example, see the .yaml files in the [postgres folder](../apps/infra/postgres
 
 ```mermaid
   graph TD;
-      rootApp[Deploy Argo CD root Application]-->infraAppSet[Deploy Argo CD ApplicationSet]
+      rootApp[Argo CD root Application]---->infraAppSet[Argo CD Infra ApplicationSet]
+      rootApp[Argo CD root Application]---->servicesAppSet[Argo CD Services ApplicationSet]
       
-      infraAppSet-->extPostgresOperator[Deploy ext-postgres-operator chart]
+      infraAppSet---->extPostgresOperator[ext-postgres-operator chart]
+      infraAppSet---->postgres[postgres chart]
+
+      servicesAppSet-->samplePGApp[sample-pg-app chart]
       
-      infraAppSet-->postgres[Deploy postgres chart]
 ```
 
 ## Edit Argo CD Root Application

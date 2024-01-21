@@ -17,10 +17,10 @@ spec:
       project: default
       sources:
         - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
-          targetRevision: main
+          targetRevision: refactor-doc-and-pg-auth
           ref: deployRepo
         - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
-          targetRevision: main
+          targetRevision: refactor-doc-and-pg-auth
           path: "apps/services/{{path.basename}}/hooks"
         - repoURL: '{{repoURL}}'
           targetRevision: '{{targetRevision}}'

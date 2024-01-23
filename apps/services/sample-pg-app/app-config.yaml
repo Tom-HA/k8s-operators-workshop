@@ -1,4 +1,4 @@
-repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git
+repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
 targetRevision: refactor-doc-and-pg-auth
 chartPath: ./sample-pg-app/chart/sample-pg-app
 namespace: services

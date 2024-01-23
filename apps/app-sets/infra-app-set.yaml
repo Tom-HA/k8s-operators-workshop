@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
+      repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git
       revision: refactor-doc-and-pg-auth
       files:
       - path: "apps/infra/**/app-config.yaml"
@@ -16,7 +16,7 @@ spec:
     spec:
       project: default
       sources:
-        - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
+        - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git
           targetRevision: refactor-doc-and-pg-auth
           ref: deployRepo
         - repoURL: '{{repoURL}}'

@@ -28,29 +28,22 @@ Add the following `.yaml` to [apps/services/sample-pg-app/hooks](apps/services/s
 apiVersion: db.movetokube.com/v1alpha1
 kind: Postgres
 metadata:
-  name: sample-pg-app
+  name: sample-pg-app-db
   namespace: services
   annotations:
     argocd.argoproj.io/hook: PreSync # Executes prior to the sync operation.
 spec:
-  database: sample-pg-app # Name of database created in PostgreSQL
+  database: sample-pg-app-db # Name of database created in PostgreSQL
   dropOnDelete: false # Set to true if you want the operator to drop the database and role when this CR is deleted (optional)
 ```
 
+After you pushed your changes, in the web UI, go back to the sample-pg-app page, you should see a new _postgres_ resource!  
 
-Our sample-pg-app will also need a user name and password for authentication.  
-We can declare a new user that will be associated with the database we've created:  
+![post-database](./images/post-database.png "post-database")
 
-```yaml
-apiVersion: db.movetokube.com/v1alpha1
-kind: PostgresUser
-metadata:
-  name: sample-pg-app-auth
-  namespace: services
-spec:
-  role: sample-user
-  database: sample-pg-app-db       # This references the Postgres CR
-  secretName: postgres
-  privileges: OWNER     # Can be OWNER/READ/WRITE
-```
+> [!NOTE]  
+> If you don't see the _postgres_ resource, you might need to wait for Argo-CD to sync the changes from your repository, alternatively, you can trigger a sync manually by clicking on the `sync` button and then `synchronize`.
 
+Congratulations! You've just provisioned a database declaratively with GitOps and a Kubernetes operator!  
+But wait, the sample-pg-app still needs a Kubernetes secret with credentials to connect to the database.  
+That will be covered in the [next slide](./03_create_postgres_credentials.md).

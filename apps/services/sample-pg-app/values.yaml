@@ -1,0 +1,3 @@
+postgres:
+  auth:
+    secretName: "postgres-sample-pg-app-auth"

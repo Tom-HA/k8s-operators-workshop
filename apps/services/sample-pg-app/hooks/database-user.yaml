@@ -1,0 +1,10 @@
+apiVersion: db.movetokube.com/v1alpha1
+kind: PostgresUser
+metadata:
+  name: sample-pg-app-auth
+  namespace: services
+spec:
+  role: sample-user
+  database: sample-pg-app-db       # This references the Postgres CR
+  secretName: postgres
+  privileges: OWNER     # Can be OWNER/READ/WRITE

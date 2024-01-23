@@ -25,8 +25,8 @@ spec:
         - repoURL: '{{repoURL}}'
           targetRevision: '{{targetRevision}}'
           path: '{{chartPath}}'
-          ignoreMissingValueFiles: true
           helm:
+            ignoreMissingValueFiles: true
             valueFiles:
               - $deployRepo/apps/services/{{path.basename}}/values.yaml
       destination:

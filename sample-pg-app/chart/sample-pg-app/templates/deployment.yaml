@@ -54,6 +54,40 @@ spec:
             - name: {{ $key }}
               value: {{ $value | quote }}
           {{- end }}
+          {{- range $key, $value := .Values.postgres.config }}
+            {{- if $value }}
+            - name: {{ snakecase $key | upper }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          {{- if and .Values.postgres.auth.secretName .Values.postgres.auth.hostSecretKey }}
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.auth.secretName }}
+                  key: {{ .Values.postgres.auth.hostSecretKey }}
+          {{- end }}
+          {{- if and .Values.postgres.auth.secretName .Values.postgres.auth.userSecretKey }}
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.auth.secretName }}
+                  key: {{ .Values.postgres.auth.userSecretKey }}
+          {{- end }}
+          {{- if and .Values.postgres.auth.secretName .Values.postgres.auth.passwordSecretKey }}
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.auth.secretName }}
+                  key: {{ .Values.postgres.auth.passwordSecretKey }}
+          {{- end }}
+          {{- if and .Values.postgres.auth.secretName .Values.postgres.auth.dbSecretKey }}
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.auth.secretName }}
+                  key: {{ .Values.postgres.auth.dbSecretKey }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

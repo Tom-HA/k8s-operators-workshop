@@ -82,3 +82,18 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+
+postgres:
+  config:
+    postgresHost: ""
+    postgresUser: ""
+    postgresDB: ""
+    postgresPort: 5432
+  auth:
+    secretName: ""
+    hostSecretKey: "HOST"
+    userSecretKey: "LOGIN"
+    passwordSecretKey: "PASSWORD"
+    dbSecretKey: "DATABASE_NAME"
+  

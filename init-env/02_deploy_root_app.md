@@ -1,6 +1,6 @@
 # Deploy Argo CD Root Application
 
-In this section we are going to apply a Custom Resource of kind _Application_ and learn a bit about a Custom Resource of kind _Application Set_.  
+In this section we are going to apply a Custom Resource of kind _Application_ and learn about a Custom Resource of kind _Application Set_.  
 
 Now that we have Argo CD deployed in our cluster, and we can access its web UI, we need to create an Argo CD application that tells Argo CD to sync manifests and helm charts from your repository.
 
@@ -14,18 +14,21 @@ Since it is the first application that we deploy, and it tells Argo CD to deploy
 The [app-sets](../apps/app-sets) directory contains
 Custom Resources of kind _Application Set_.  
 These Custom Resources will tell Argo CD to dynamically create _Applications_ according to the file structure in your repository.  
-In our case, for each folder in the [infra folder](../apps/infra), create an _Application_ with the configuration in the .yaml files.  
+In our case, for each folder in the [infra folder](../apps/infra) and [services folder](../apps/services), create an _Application_ with the configuration in the .yaml files.  
 For example, see the .yaml files in the [postgres folder](../apps/infra/postgres).  
 
 ### Flow
 
 ```mermaid
   graph TD;
-      rootApp[Deploy Argo CD root Application]-->infraAppSet[Deploy Argo CD ApplicationSet]
+      rootApp[Argo CD root Application]---->infraAppSet[Argo CD Infra ApplicationSet]
+      rootApp[Argo CD root Application]---->servicesAppSet[Argo CD Services ApplicationSet]
       
-      infraAppSet-->extPostgresOperator[Deploy ext-postgres-operator chart]
+      infraAppSet---->extPostgresOperator[ext-postgres-operator chart]
+      infraAppSet---->postgres[postgres chart]
+
+      servicesAppSet-->samplePGApp[sample-pg-app chart]
       
-      infraAppSet-->postgres[Deploy postgres chart]
 ```
 
 ## Edit Argo CD Root Application
@@ -35,7 +38,7 @@ Open the [argocd-root-app.yaml](./values/argo-cd/argocd-root-app.yaml) manifest,
 
 ## Edit Argo CD Application sets
 
-Open the [infra-app-set.yaml](apps/app-sets/infra-app-set.yaml) manifest and update every instance of `repoURL` to your repository's URL.
+Open the [services-app-set.yam](apps/app-sets/services-app-set.yam) manifest and update every instance of `repoURL` to your repository's URL.
 
 ## Apply Argo CD Root Application
 

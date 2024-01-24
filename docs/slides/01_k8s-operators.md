@@ -6,4 +6,4 @@ For example, an operator that manages the creation and deletion of databases, by
 Here is another description of operators from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/):  
 "_Operators are software extensions to Kubernetes that make use of custom resources to manage applications and their components. Operators follow Kubernetes principles, notably the control loop._"
 
-![k8s operator](./images/k8s-workshop-operator.png "k8s operator")
+![k8s operator](../images/k8s-workshop-operator.png "k8s operator")

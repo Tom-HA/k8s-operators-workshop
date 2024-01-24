@@ -7,7 +7,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git
-      revision: refactor-doc-and-pg-auth
+      revision: main
       files:
       - path: "apps/infra/**/app-config.yaml"
   template:
@@ -17,7 +17,7 @@ spec:
       project: default
       sources:
         - repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git
-          targetRevision: refactor-doc-and-pg-auth
+          targetRevision: main
           ref: deployRepo
         - repoURL: '{{repoURL}}'
           targetRevision: '{{targetRevision}}'

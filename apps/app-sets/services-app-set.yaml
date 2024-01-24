@@ -7,7 +7,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/Tom-HA/k8s-operators-workshop.git # change this to your repo URL
-      revision: refactor-doc-and-pg-auth
+      revision: main
       files:
       - path: "apps/services/**/app-config.yaml"
   template:

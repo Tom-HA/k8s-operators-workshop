@@ -4,7 +4,7 @@ weight: 222
 ---
 </br>
 
-After initializing the environment and deploying the root application, in the Argo-CD web UI (see how to access the web UI in the [previous section](../init-env/01_deploy_argocd.md#forward-traffic-to-argo-cd)), you should see the root-app, postgresql, ext-postgres-operator, and sample-pg-app:  
+After initializing the environment and deploying the root application, in the Argo-CD web UI (see how to access the web UI in the [previous section](./init-env/01_deploy_argocd.md#forward-traffic-to-argo-cd)), you should see the root-app, postgresql, ext-postgres-operator, and sample-pg-app:  
 
 ![argocd-dashboard](./images/argocd-applications.png "argocd-dashboard")
 
@@ -20,12 +20,12 @@ As you can see, the Pod is missing a Kubernetes Secret:
 
 Our sample-pg-app is expecting a Kubernetes secret with authentication details to the PostgreSQL database
 {{% alert context="info" %}}
-You can check the code and the chart under the [sample-pg-app folder](../sample-pg-app).
+You can check the code and the chart under the [sample-pg-app folder](https://github.com/Tom-HA/k8s-operators-workshop/tree/main/sample-pg-app).
 {{% /alert %}}
 
 To fix it, we are going to implement a _Postgres_ CR which will instruct the ext-postgres-operator to provision a new database.  
 
-Add the following `.yaml` to [apps/services/sample-pg-app/hooks](apps/services/sample-pg-app/hooks), then commit and push your changes.  
+Add the following `.yaml` to [apps/services/sample-pg-app/hooks](https://github.com/Tom-HA/k8s-operators-workshop/tree/main/apps/services/sample-pg-app/hooks), then commit and push your changes.  
 {{% alert context="warning" %}}
 Make sure the file name you choose ends with `.yaml`, for example, `database.yaml`.
 {{% /alert %}}

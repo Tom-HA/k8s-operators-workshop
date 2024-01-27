@@ -19,3 +19,8 @@ Make sure you have the following utilities installed:
 * [helm](https://helm.sh/docs/intro/install/)
 * [helmfile](https://github.com/helmfile/helmfile#installation)
 * [helm-diff plugin](https://github.com/databus23/helm-diff)
+
+
+### Fork
+
+Fork the [K8s Workshop Repository](https://github.com/Tom-HA/k8s-operators-workshop.git). In this workshop you are going to commit changes and see how they affect your local workshop environment!

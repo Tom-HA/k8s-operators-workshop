@@ -1,5 +1,5 @@
 ---
-title: "Custom Resource Definitions and Custom Resources"
+title: "CRDs & CRs"
 weight: 102
 ---
 <br>

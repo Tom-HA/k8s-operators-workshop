@@ -1,6 +1,6 @@
 # k8s-operators-workshop
 
-In this workshop, you are going to learn and experiment with Kubernetes operators, CRDs, CRs, Helm, Helmfile, Argo-CD, and GitOps.  
+This workshop grazes the surface of Kubernetes operators, CRDs, CRs, Helm, Helmfile, Argo-CD, and GitOps.  
 
 ## Prerequisites
 
@@ -16,4 +16,4 @@ Make sure you have the following utilities installed:
 
 ## Getting started
 
-To get started, __fork this repository__, and follow the documentation under the [docs](./docs) folder.  
+To get started, __fork this repository__, and follow the documentation here: https://tom-ha.github.io/k8s-operators-workshop/.  

@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes operators and Custom Resources"
+title: "Operators and Custom Resources"
 weight: 103
 ---
 <br>
@@ -9,7 +9,7 @@ weight: 103
 Now that we've covered the basics of Kubernetes operators, Custom Resource Definitions, and Custom Resources, let's tie it up together.  
 Think of the following scenario:  
 We need to dynamically provision a database when creating a new microservice.  
-To solve it using the operator pattern, we can create a CRD of kind _Postgres_ with a `database` key in its specification (similar to the example in [custom resources slide](./02_custom-resources.md)),  
+To solve it using the operator pattern, we can create a CRD of kind _Postgres_ with a `database` key in its specification (similar to the example in [CRDs & CRs slide](./02_crds_and_crs.md)),  
 then, we'll introduce a Kubernetes operator that will constantly watch for new custom resources of kind _Postgres_.  
 Once the operator detects a new CR of kind _Postgres_, it will provision a new database, and it will name it according to the `database` value in the CR.  
 

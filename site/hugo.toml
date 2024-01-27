@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://tom-ha.github.io/k8s-operators-workshop/'
 languageCode = 'en-us'
 title = 'K8s Operators Workshop'
 enableEmoji = true

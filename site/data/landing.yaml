@@ -19,8 +19,8 @@ hero:
   #   soft: true # boolean
 
   titleLogo:
-    path: "images/logos"
-    filename: "title_logo.png"
+    path: "images"
+    filename: "k8s_logo.png"
     alt: "Lotus Docs Logo"
     height: 80px
 
@@ -41,7 +41,7 @@ hero:
   cta2Button:
     icon: rocket_launch
     btnText: "Get Started"
-    url: "/docs/getting-started/00_intro"
+    url: "/k8s-operators-workshop/docs/slides/01_k8s-operators/"
 
   info: "**Open Source** MIT Licensed."
 

@@ -54,6 +54,9 @@ enableGitInfo = true
 
   [params.social]
     github = "Tom-HA/k8s-operators-workshop"
+  
+  [params.flexsearch]
+    enabled             = true
 
   [params.docs] # Parameters for the /docs 'template'
     title = "Changes"

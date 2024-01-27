@@ -2,3 +2,9 @@ sample-pg-app/.env
 .idea/vcs.xml
 .idea/workspace.xml
 .vscode/launch.json
+site/.hugo_build.lock
+site/resources
+exampleSite
+site_compose
+site_doks
+site/assets/jsconfig.json

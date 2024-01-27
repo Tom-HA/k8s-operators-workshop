@@ -1,0 +1,88 @@
+baseURL = 'https://tom-ha.github.io/k8s-operators-workshop/'
+languageCode = 'en-us'
+title = 'K8s Operators Workshop'
+enableEmoji = true
+enableGitInfo = true
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.100.0"
+  [[module.imports]]
+      path = "github.com/colinwilson/lotusdocs"
+      disable = false
+  [[module.imports]]
+      path = "github.com/gohugoio/hugo-mod-bootstrap-scss/v5"
+      disable = false
+
+[[menu.primary]]
+  name  = "Docs"
+  url = "/docs/"
+  identifier = "docs"
+  weight = 10
+
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.tableOfContents]
+      endLevel = 3
+      startLevel = 1
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true # https://jdhao.github.io/2019/12/29/hugo_html_not_shown/
+  # [markup.highlight]
+  #   codeFences = false # disables Hugo's default syntax highlighting
+  [markup.goldmark.parser]
+    [markup.goldmark.parser.attribute]
+      block = true
+      title = true
+
+[params]
+
+  google_fonts = [
+    ["Inter", "300, 400, 600, 700"],
+    ["Fira Code", "500, 700"]
+  ]
+
+  sans_serif_font = "Inter"     # Default is System font
+  secondary_font  = "Inter"     # Default is System font
+  mono_font       = "Fira Code" # Default is System font
+
+
+  [params.footer]
+    copyright = "© :YEAR: K8s Operators Workshop. Built with [**Lotus Docs**](https://github.com/colinwilson/lotusdocs)"
+
+  [params.social]
+    github = "Tom-HA/k8s-operators-workshop"
+  
+  [params.flexsearch]
+    enabled             = true
+
+  [params.docs] # Parameters for the /docs 'template'
+    title = "Changes"
+    descriptions = false
+    backToTop = true
+    darkMode = true
+    sidebarIcons = true
+    titleIcon = true
+    intLinkTooltip = true 
+
+
+    repoURL         = "https://github.com/Tom-HA/k8s-operators-workshop"  # Git repository URL for your site [support for GitHub, GitLab, and BitBucket]
+    repoBranch      = "main"
+    editPage        = true                                # enable 'Edit this page' feature - default false
+    lastMod         = true                                # enable 'Last modified' date on pages - default false
+    lastModRelative = true                                # format 'Last modified' time as relative - default true
+
+    breadcrumbs     = true                                # default is true
+
+    # ToC
+    toc             = true                                # enable table of contents? default is true
+    tocMobile       = true                                # enable table of contents in mobile view? default is true
+    scrollSpy       = true                                # enable scrollspy on ToC? default is true
+
+    # content navigation
+    navDesc         = true                                # include front matter descriptions in Prev/Next navigation cards
+    navDescTrunc    = 30                                  # Number of characters by which to truncate the Prev/Next descriptions
+
+    listDescTrunc   = 100                                 # Number of characters by which to truncate the list card description

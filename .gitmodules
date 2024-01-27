@@ -1,6 +1,0 @@
-[submodule "site_new/doks"]
-	path = site_new/doks
-	url = https://github.com/gethyas/doks.git
-[submodule "site_new/themes"]
-	path = site_new/themes
-	url = https://github.com/gethyas/doks.git

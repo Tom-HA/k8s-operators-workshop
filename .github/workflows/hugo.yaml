@@ -23,6 +23,7 @@ defaults:
 
 jobs:
   build:
+    name: "Build Docs"
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.121.0
@@ -60,6 +61,7 @@ jobs:
           path: ./site/public
 
   deploy:
+    name: "Deploy Docs Site"
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

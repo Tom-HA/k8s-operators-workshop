@@ -1,6 +1,6 @@
 ---
 title: "GitOps and Argo CD"
-weight: 5
+weight: 105
 ---
 <br>
 

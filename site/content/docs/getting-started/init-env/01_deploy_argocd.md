@@ -1,9 +1,14 @@
 ---
 title: "Initial Provisioning Overview"
-weight: 1
+weight: 211
 ---
 <br>
 
+# Overview
+
+Once the prerequisite (see the [prerequisites section](../01_intro.md#prerequisites)) are completed, we'll need to initialize the environment.
+
+To initialize the environment, follow the documentation under the [init-env](../init-env) folder.
 In this section, we'll use _Helmfile_ to install Argo CD, this enables us to complete this workshop by following the GitOps methodology.  
 Using Argo CD, we'll provision a PostgreSQL database and a PostgreSQL operator.  
 

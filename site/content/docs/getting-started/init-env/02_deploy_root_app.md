@@ -1,6 +1,6 @@
 ---
 title: "Deploy Argo CD Root Application"
-weight: 2
+weight: 212
 ---
 <br>
 

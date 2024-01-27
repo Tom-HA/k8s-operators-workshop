@@ -1,6 +1,6 @@
 ---
 title: "Custom Resource Definitions and Custom Resources"
-weight: 2
+weight: 102
 ---
 <br>
 

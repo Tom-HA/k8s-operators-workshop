@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes operators and Custom Resources"
-weight: 3
+weight: 103
 ---
 <br>
 

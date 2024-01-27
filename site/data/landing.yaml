@@ -21,7 +21,6 @@ hero:
   titleLogo:
     path: "images"
     filename: "k8s_logo.png"
-    alt: "Lotus Docs Logo"
     height: 80px
 
   title: "K8s Operators"
@@ -53,7 +52,7 @@ imageCompare:
   weight: 30
   template: image compare
 
-  title: test
-  subtitle: test
+  title:
+  subtitle:
 
   items: []

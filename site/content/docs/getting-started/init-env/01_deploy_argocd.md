@@ -9,7 +9,7 @@ weight: 211
 Once the prerequisite (see the [prerequisites section](../01_intro.md#prerequisites)) are completed, we'll need to initialize the environment.
 
 To initialize the environment, we'll use _Helmfile_ to install Argo CD, this enables us to complete this workshop by following the GitOps methodology.  
-Using Argo CD, we'll provision a PostgreSQL database and a PostgreSQL operator.  
+Using Argo CD and a Kubernetes operator, we'll provision a PostgreSQL database and a PostgreSQL operator.  
 
 ## Deploy Argo CD
 

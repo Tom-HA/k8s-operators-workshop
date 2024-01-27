@@ -9,8 +9,9 @@ In this slide we are going to provision a user and password for the database whi
 ## Create PostgreSQL user
 
 We can declare a new user that will be associated to the database by creating the following `.yaml` in [apps/services/sample-pg-app/hooks](https://github.com/Tom-HA/k8s-operators-workshop/tree/main/apps/services/sample-pg-app/hooks):  
-> [!WARNING]  
-> Again, make sure the file name you choose ends with `.yaml`, for example, `database-user.yaml`.
+{{% alert context="warning" %}}
+Again, make sure the file name you choose ends with `.yaml`, for example, `database-user.yaml`.
+{{% /alert %}}
 
 ```yaml
 apiVersion: db.movetokube.com/v1alpha1

@@ -62,10 +62,10 @@ enableGitInfo = true
     optimize            = true   # default is true
     minQueryChar        = 1      # default is 0 (disabled)
     maxResult           = 5      # default is 5
-    searchSectionsIndex = []
+    searchSectionsIndex = ["docs"]
 
   [params.docs] # Parameters for the /docs 'template'
-    title = "Changes"
+    title = "k8s-operators-workshop"
     descriptions = false
     backToTop = true
     darkMode = true

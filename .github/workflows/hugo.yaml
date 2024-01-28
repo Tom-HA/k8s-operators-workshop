@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - fix-search
 
   workflow_dispatch:
 
@@ -57,7 +58,7 @@ jobs:
   deploy:
     name: "Deploy Docs Site"
     environment:
-      name: github-pages
+      name: staging
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build

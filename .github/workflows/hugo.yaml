@@ -45,7 +45,7 @@ jobs:
             -e "s/@DOCSEARCH_API_ID@/${{ secrets.DOCSEARCH_API_ID }}/" \
             -e "s/@DOCSEARCH_API_KEY@/${{ secrets.DOCSEARCH_API_KEY }}/" \
             -e "s/@DOCSEARCH_INDEX_NAME@/${{ secrets.DOCSEARCH_INDEX_NAME }}/" \
-            hugo.toml
+            ./site/hugo.toml
       - name: Build with Hugo
         env:
           # For maximum backward compatibility with Hugo modules

@@ -53,7 +53,10 @@ enableGitInfo = true
   [params.social]
     github = "Tom-HA/k8s-operators-workshop"
   
-  [params.docsearch]
+  [params.docsearch] # Parameters for DocSearch
+    appID     = "@DOCSEARCH_API_ID@"                        # DocSearch Application ID
+    apiKey    = "@DOCSEARCH_API_KEY@"                       # DocSearch Search-Only API (Public) Key
+    indexName = "@DOCSEARCH_INDEX_NAME@"                    # Index Name on which to perform search
 
   [params.docs] # Parameters for the /docs 'template'
     title = "k8s-operators-workshop"

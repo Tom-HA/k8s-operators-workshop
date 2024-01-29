@@ -30,12 +30,10 @@ enableGitInfo = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true # https://jdhao.github.io/2019/12/29/hugo_html_not_shown/
-  # [markup.highlight]
-  #   codeFences = false # disables Hugo's default syntax highlighting
-  [markup.goldmark.parser]
-    [markup.goldmark.parser.attribute]
-      block = true
-      title = true
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
 
 [params]
 
@@ -55,11 +53,13 @@ enableGitInfo = true
   [params.social]
     github = "Tom-HA/k8s-operators-workshop"
   
-  [params.flexsearch]
-    enabled             = true
+  [params.docsearch] # Parameters for DocSearch
+    appID     = "@DOCSEARCH_API_ID@"                        # DocSearch Application ID
+    apiKey    = "@DOCSEARCH_API_KEY@"                       # DocSearch Search-Only API (Public) Key
+    indexName = "@DOCSEARCH_INDEX_NAME@"                    # Index Name on which to perform search
 
   [params.docs] # Parameters for the /docs 'template'
-    title = "Changes"
+    title = "k8s-operators-workshop"
     descriptions = false
     backToTop = true
     darkMode = true

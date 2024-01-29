@@ -60,6 +60,9 @@ jobs:
     environment:
       name: staging
       url: ${{ steps.deployment.outputs.page_url }}
+      HUGO_PARAMS_DOCSEARCH_appID: ${{ secrets.HUGO_PARAMS_DOCSEARCH_APPID }}
+      HUGO_PARAMS_DOCSEARCH_apiKey: ${{ secrets.HUGO_PARAMS_DOCSEARCH_APIKEY }}
+      HUGO_PARAMS_DOCSEARCH_indexName: ${{ secrets.HUGO_PARAMS_DOCSEARCH_INDEXNAME }}
     runs-on: ubuntu-latest
     needs: build
     steps:

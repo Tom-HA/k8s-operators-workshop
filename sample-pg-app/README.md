@@ -1,3 +1,3 @@
 # sample pg app
 
-A sample application that test connection to a PostgreSQL database
+A sample application for testing communication with PostgreSQL database

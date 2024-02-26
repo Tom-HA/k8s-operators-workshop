@@ -4,7 +4,7 @@ weight: 201
 ---
 </br>
 
-Before starting with the workshop, it is recommended to review the documentation in the [overview section](./slides) to better understand the topics we are going to discuss and implement.
+Before starting with the workshop, it is recommended to review the documentation in the [overview section](../slides) to better understand the topics we are going to discuss and implement.
 
 ## Prerequisites
 
